@@ -1,0 +1,117 @@
+# AgentRed Backend Dependencies
+# Verified March 2026
+
+# Web Framework
+fastapi==0.135.1
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+
+# Database
+sqlalchemy==2.0.48
+alembic==1.18.4
+asyncpg==0.30.0
+psycopg2-binary==2.9.10
+pgvector==0.3.6
+
+# Cache / Task Queue
+redis==5.2.1
+celery==5.6.2
+celery[redis]==5.6.2
+flower==2.0.1
+
+# Auth & Security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+cryptography==44.0.0
+
+# HTTP Client
+httpx==0.28.1
+aiohttp==3.11.11
+
+# AI APIs
+anthropic==0.45.0
+openai==1.65.0
+ollama==0.4.7
+
+# ML & Data Science
+scikit-learn==1.6.1
+numpy==2.2.3
+scipy==1.15.2
+statsmodels==0.14.4
+
+# NLP
+spacy==3.8.4
+
+# Vector Search
+pgvector==0.3.6
+
+# PDF Generation
+weasyprint==68.1
+jinja2==3.1.5
+markdown==3.7
+
+# Data Processing
+pandas==2.2.3
+duckdb==1.2.0
+
+# Image Processing (multimodal attacks)
+opencv-python==4.11.0.86
+Pillow==11.1.0
+
+# Validation
+pydantic==2.10.6
+pydantic-settings==2.8.0
+email-validator==2.2.0
+
+# Email
+sendgrid==6.11.0
+
+# Integrations
+slack-sdk==3.34.0
+jira==3.8.0
+
+# Storage
+boto3==1.36.19
+
+# Observability
+sentry-sdk[fastapi]==2.21.0
+posthog==3.8.3
+opentelemetry-api==1.31.0
+opentelemetry-sdk==1.31.0
+opentelemetry-instrumentation-fastapi==0.52b0
+
+# Utilities
+python-dotenv==1.0.1
+click==8.1.8
+typer==0.15.2
+rich==13.9.4
+pyyaml==6.0.2
+toml==0.10.2
+pathlib==1.0.1
+
+# Security
+bandit==1.8.3
+
+# LangChain ecosystem (for framework adapters + testing)
+langchain==0.3.19
+langchain-openai==0.3.7
+langchain-anthropic==0.3.8
+langsmith==0.3.8
+langgraph==0.3.5
+
+# Code generation security
+datasets==3.3.2
+
+# Additional vector DB options
+qdrant-client==1.13.3
+
+# STIX formatting
+stix2==3.0.1
+
+# Testing
+pytest==8.3.5
+pytest-asyncio==0.25.3
+pytest-cov==6.0.0
+httpx==0.28.1
+factory-boy==3.3.3
+faker==36.1.1

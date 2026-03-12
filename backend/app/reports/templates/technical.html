@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgentRed Technical Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 1cm;
+            @bottom-center {
+                content: "Page " counter(page) " of " counter(pages);
+                font-size: 9pt;
+                color: #666;
+            }
+        }
+
+        body {
+            font-family: "Courier New", Courier, monospace;
+            color: #333;
+            line-height: 1.5;
+            background: #fff;
+            font-size: 9pt;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        /* Header */
+        .header {
+            background: #1f2937;
+            color: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #dc2626;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .header p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .section {
+            margin-bottom: 1.25rem;
+        }
+
+        .section h2 {
+            font-size: 1.2rem;
+            color: #1f2937;
+            border-bottom: 2px solid #dc2626;
+            padding-bottom: 0.4rem;
+            margin-bottom: 0.75rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .section h3 {
+            font-size: 1rem;
+            color: #374151;
+            margin-top: 0.6rem;
+            margin-bottom: 0.4rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        /* Finding Details */
+        .finding {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-left: 3px solid #dc2626;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            page-break-inside: avoid;
+        }
+
+        .finding-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .finding-id {
+            font-weight: 700;
+            color: #dc2626;
+            font-size: 0.95rem;
+        }
+
+        .severity-badge {
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        .severity-critical {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .severity-high {
+            background: #fecaca;
+            color: #b91c1c;
+        }
+
+        .severity-medium {
+            background: #fde047;
+            color: #b45309;
+        }
+
+        .severity-low {
+            background: #d1fae5;
+            color: #047857;
+        }
+
+        .finding-details {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .finding-details strong {
+            color: #1f2937;
+        }
+
+        /* Code/Payload Section */
+        .code-block {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 0.75rem;
+            border-radius: 3px;
+            margin: 0.5rem 0;
+            overflow-x: auto;
+            font-size: 0.8rem;
+        }
+
+        .evidence {
+            background: #ecfdf5;
+            border-left: 3px solid #10b981;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            font-size: 0.85rem;
+            color: #065f46;
+        }
+
+        /* Category Breakdown */
+        .category-section {
+            page-break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-header {
+            background: #dc2626;
+            color: white;
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Summary Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            border-radius: 3px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #dc2626;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            margin-top: 0.2rem;
+        }
+
+        /* Results Table */
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .results-table thead {
+            background: #1f2937;
+            color: white;
+        }
+
+        .results-table th {
+            padding: 0.4rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .results-table td {
+            padding: 0.4rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .results-table tbody tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 1.5rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.75rem;
+            color: #6b7280;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>AgentRed Technical Report</h1>
+        <p>Detailed Findings and Attack Analysis</p>
+        <p style="font-size: 0.75rem; margin-top: 0.4rem;">Generated: {{ generated_at }}</p>
+    </div>
+
+    <!-- Summary Statistics -->
+    <div class="section">
+        <h2>Summary Statistics</h2>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">{{ total_attacks }}</div>
+                <div class="stat-label">Total Attacks</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">{{ successful_attacks }}</div>
+                <div class="stat-label">Successful</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">{{ (successful_attacks / total_attacks * 100) | round(0) }}%</div>
+                <div class="stat-label">Success Rate</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scan Information -->
+    <div class="section">
+        <h2>Scan Information</h2>
+        <div class="finding-details">
+            <strong>Scan ID:</strong> {{ scan.scan_id }}<br>
+            <strong>Target:</strong> {{ scan.target_name }}<br>
+            <strong>Scan Date:</strong> {{ scan.scan_date }}<br>
+            <strong>Duration:</strong> {{ scan.duration_seconds }}s
+        </div>
+    </div>
+
+    <!-- Results by Severity -->
+    {% for severity in ['critical', 'high', 'medium', 'low'] %}
+    {% if by_severity[severity] %}
+    <div class="section">
+        <h2>{{ severity | upper }} Severity Findings ({{ by_severity[severity] | length }})</h2>
+        {% for result in by_severity[severity] %}
+        <div class="finding">
+            <div class="finding-header">
+                <div class="finding-id">{{ result.attack_id }}</div>
+                <div class="severity-badge severity-{{ severity }}">{{ severity | upper }}</div>
+            </div>
+
+            <div class="finding-details">
+                <strong>Category:</strong> {{ result.category }}<br>
+                <strong>Attack Type:</strong> {{ result.attack_type }}<br>
+                <strong>Status:</strong> {% if result.success %}Success{% else %}Blocked{% endif %}<br>
+                {% if result.test_date %}<strong>Tested:</strong> {{ result.test_date }}<br>{% endif %}
+            </div>
+
+            {% if result.description %}
+            <div style="font-size: 0.85rem; margin-bottom: 0.4rem;">
+                {{ result.description }}
+            </div>
+            {% endif %}
+
+            {% if result.payload %}
+            <div>
+                <strong style="font-size: 0.85rem;">Payload:</strong>
+                <div class="code-block">{{ result.payload | escape }}</div>
+            </div>
+            {% endif %}
+
+            {% if result.evidence %}
+            <div class="evidence">
+                <strong>Evidence:</strong> {{ result.evidence }}
+            </div>
+            {% endif %}
+
+            {% if result.remediation %}
+            <div style="font-size: 0.85rem; margin-top: 0.4rem; background: #ecf0ff; padding: 0.4rem; border-radius: 2px;">
+                <strong>Remediation:</strong> {{ result.remediation }}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <!-- Results by Category -->
+    <div class="section">
+        <h2>Results by Category</h2>
+        {% for category, category_results in by_category.items() %}
+        <div class="category-section">
+            <div class="category-header">{{ category }} ({{ category_results | length }} attacks)</div>
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Attack ID</th>
+                        <th>Type</th>
+                        <th>Severity</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in category_results %}
+                    <tr>
+                        <td><strong>{{ result.attack_id }}</strong></td>
+                        <td>{{ result.attack_type }}</td>
+                        <td>
+                            <span class="severity-badge severity-{{ result.severity | lower }}">
+                                {{ result.severity | upper }}
+                            </span>
+                        </td>
+                        <td>{% if result.success %}Success{% else %}Blocked{% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="footer">
+        <p>AgentRed — AI Red Teaming & Security Assessment Platform</p>
+        <p>Confidential — For Internal Use Only</p>
+    </div>
+</body>
+</html>

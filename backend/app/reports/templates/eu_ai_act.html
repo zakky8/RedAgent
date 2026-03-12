@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgentRed EU AI Act Compliance Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 1cm;
+            @bottom-center {
+                content: "Page " counter(page) " of " counter(pages);
+                font-size: 9pt;
+                color: #666;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background: #fff;
+            font-size: 10pt;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+            color: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Legal Disclaimer */
+        .legal-disclaimer {
+            background: #fffbeb;
+            border: 2px solid #f59e0b;
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #92400e;
+        }
+
+        .legal-disclaimer strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .section {
+            margin-bottom: 1.5rem;
+            page-break-inside: avoid;
+        }
+
+        .section h2 {
+            font-size: 1.4rem;
+            color: #1f2937;
+            border-bottom: 3px solid #dc2626;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section h3 {
+            font-size: 1.1rem;
+            color: #374151;
+            margin-top: 0.75rem;
+            margin-bottom: 0.5rem;
+            border-left: 4px solid #dc2626;
+            padding-left: 0.75rem;
+        }
+
+        /* Article Assessment */
+        .article-assessment {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            page-break-inside: avoid;
+        }
+
+        .article-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-id {
+            font-weight: 700;
+            color: #dc2626;
+            font-size: 1.05rem;
+        }
+
+        .assessment-status {
+            padding: 0.35rem 0.75rem;
+            border-radius: 3px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .status-pass {
+            background: #d1fae5;
+            color: #047857;
+        }
+
+        .status-partial {
+            background: #fde047;
+            color: #b45309;
+        }
+
+        .status-fail {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .status-not-tested {
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+
+        .article-title {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-score {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-bar {
+            width: 150px;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            margin-right: 0.5rem;
+            overflow: hidden;
+        }
+
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #dc2626 0%, #7f1d1d 100%);
+        }
+
+        .score-text {
+            font-weight: 700;
+            color: #1f2937;
+            min-width: 45px;
+        }
+
+        .findings {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-top: 0.35rem;
+        }
+
+        /* Summary Table */
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .summary-table thead {
+            background: #1f2937;
+            color: white;
+        }
+
+        .summary-table th {
+            padding: 0.6rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .summary-table td {
+            padding: 0.6rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .summary-table tbody tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.8rem;
+            color: #6b7280;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>EU AI Act Compliance Report</h1>
+        <p>Articles 9-15 Risk Management and Compliance Assessment</p>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem;">Generated: {{ generated_at }}</p>
+    </div>
+
+    <div class="legal-disclaimer">
+        <strong>LEGAL DISCLAIMER (Required on Every Page):</strong>
+        {{ legal_disclaimer }}
+    </div>
+
+    <!-- Overview Section -->
+    <div class="section">
+        <h2>Assessment Overview</h2>
+        <table class="summary-table">
+            <tbody>
+                <tr>
+                    <td><strong>Scan ID:</strong></td>
+                    <td>{{ scan.scan_id }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Target System:</strong></td>
+                    <td>{{ scan.target_name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Assessment Date:</strong></td>
+                    <td>{{ scan.scan_date }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Total Controls Assessed:</strong></td>
+                    <td>{{ assessments | length }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Article-by-Article Breakdown -->
+    <div class="section">
+        <h2>Article-by-Article Assessment</h2>
+
+        {% for article, article_assessments in articles.items() %}
+        <div style="margin-bottom: 1.5rem;">
+            <h3>Article {{ article }}</h3>
+            {% for assessment in article_assessments %}
+            <div class="article-assessment">
+                <div class="article-header">
+                    <div>
+                        <div class="article-id">{{ assessment.control_id }}: {{ assessment.title }}</div>
+                    </div>
+                    <div class="assessment-status status-{{ assessment.status | lower }}">
+                        {{ assessment.status | upper }}
+                    </div>
+                </div>
+
+                <div class="article-score">
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: {{ assessment.score }}%;"></div>
+                    </div>
+                    <div class="score-text">{{ assessment.score }}%</div>
+                </div>
+
+                {% if assessment.findings %}
+                <div class="findings">
+                    <strong>Key Findings:</strong>
+                    <ul style="margin-left: 1rem; margin-top: 0.25rem;">
+                        {% for finding in assessment.findings %}
+                        <li>{{ finding }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                {% if assessment.remediation %}
+                <div class="findings">
+                    <strong>Remediation:</strong> {{ assessment.remediation }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Summary -->
+    <div class="section">
+        <h2>Compliance Summary</h2>
+        <p>This assessment identifies the degree to which the AI system complies with EU AI Act requirements in Articles 9-15. Controls are evaluated against actual adversarial test results.</p>
+        <p style="margin-top: 0.75rem;"><strong>Note:</strong> This report provides technical evidence of testing conducted. Final regulatory compliance determination requires review by qualified legal and compliance professionals.</p>
+    </div>
+
+    <div class="legal-disclaimer" style="page-break-inside: avoid; margin-top: 2rem;">
+        <strong>LEGAL DISCLAIMER (Required on Every Page):</strong>
+        {{ legal_disclaimer }}
+    </div>
+
+    <div class="footer">
+        <p>AgentRed AI Red Teaming Platform | www.agentred.io</p>
+    </div>
+</body>
+</html>

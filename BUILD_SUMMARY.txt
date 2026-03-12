@@ -1,0 +1,98 @@
+=============================================================================
+AGENTRED — AI RED TEAMING PLATFORM
+Complete Build Summary
+=============================================================================
+Generated: 2026-03-11
+
+ATTACK ENGINE
+─────────────────────────────────────────────────────────────────────────────
+Total Attack Files:          102 Python files
+Total Attack Categories:     47 categories
+Registry (auto-loaded):      60 attacks (BaseAttack ABC subclasses)
+Attack Coverage:             
+  • OWASP LLM Top 10 (2025): 18 attacks
+  • OWASP Agentic Top 10 (A01-A10): 13 attacks  
+  • OWASP MCP Top 10: 8 attacks (MCP01-MCP08)
+  • Classic Jailbreaks: 5 attacks (DAN, AIM, Grandma, Hypothetical, Roleplay)
+  • Multi-Turn: 2 attacks (Crescendo, Linear)
+  • MITRE ATLAS: 9 attacks
+  • BlackHat/DEF CON: 7 attacks
+  • Context Window: 4 attacks (1.4M deep injection, dilution, long-range, overflow)
+  • ML Privacy: 3 attacks (model inversion, membership inference, model stealing)
+  • Reasoning DoS: 3 attacks (thinking loop, CoT hijack, budget drain)
+  • Responsible AI: 3 attacks (gender bias, race bias, toxicity)
+  • Nation-State APT: 2 attacks (APT40, APT29)
+  • Supply Chain SBOM: 2 attacks
+  • Stress Performance: 2 attacks
+  • Quantum: 2 attacks (HNDL, weak crypto)
+  • RAG-specific: 2 attacks
+  • Social Engineering: 2 attacks
+  • Overreliance: 2 attacks
+  • Business Logic: 2 attacks
+  • AI DDoS: 2 attacks
+  • Web Attacks: 2 attacks (SQL injection, SSRF)
+  • + 26 more categories with files
+
+BACKEND (FastAPI 0.135.1)
+─────────────────────────────────────────────────────────────────────────────
+API Endpoints (13):          auth, targets, scans, attacks, reports, compliance,
+                              monitoring, agents, integrations, shadow_ai, dlp, sbom, skills
+Framework Adapters (15):     OpenAI, Anthropic, Ollama, Azure OpenAI, AWS Bedrock,
+                              LangChain, LangGraph, CrewAI, AutoGen, Semantic Kernel,
+                              HuggingFace, Azure AI Foundry, n8n, Make.com, Custom HTTP
+Compliance Frameworks (5):   EU AI Act (17 controls), NIST AI RMF (12 controls),
+                              OWASP LLM Top 10, ISO 42001 (8 clauses), SOC2 AI (12 criteria)
+Integrations (7):            Splunk HEC, Microsoft Sentinel, Elasticsearch, Jira,
+                              GitHub Issues/GHSA, GitLab, Generic Webhook
+Core Features:               Shadow AI Scanner, GenAI DLP (PII + API key detection),
+                              RAGET toolkit, Business Logic Tester, Deep MCP Scanner,
+                              Self-Healing Engine (claude-sonnet-4-6), SBOM Generator
+                              (CycloneDX 1.5 + SPDX 2.3)
+PDF Reports (5 types):       Executive, Technical, EU AI Act, Compliance, Remediation
+Monitor SDK:                 Zero-latency background analysis, SHA-256 hashing, kill switch
+Alembic Migration:           24 tables, pgvector extension, UUID PKs, TIMESTAMPTZ
+Celery Tasks:                Async scan execution with retry/backoff
+Monitoring Module:           ThreatAnalyzer, AnomalyDetector, MonitoringDashboard
+
+SURVIVAL MODULES (6-year)
+─────────────────────────────────────────────────────────────────────────────
+Threat Intelligence Network, Immutable Audit Logger (cryptographic chain),
+Regression Gate (CI/CD security gate), Synthetic Attack Generator (Claude-powered),
+Drift Detector, OCSF Formatter, STIX 2.1 Formatter
+
+FRONTEND (Next.js 16.1 + TypeScript)
+─────────────────────────────────────────────────────────────────────────────
+Pages (18):                  Landing (Free during beta), Login, Register,
+                              Dashboard, Scans (list/new/live), Targets, Compliance,
+                              Reports, Agents, Monitor, Settings, Integrations,
+                              MCP Scanner, SBOM, Shadow AI, Playground (CTF), + more
+Components (10+):            Sidebar, Navbar, RiskGauge, StatsGrid, Badge, Button,
+                              Card, Input, LoadingSpinner, Skeleton
+
+SDKs
+─────────────────────────────────────────────────────────────────────────────
+Python SDK:                  AgentRedClient + ScansResource + TargetsResource +
+                              ReportsResource + ComplianceResource
+JavaScript/TypeScript SDK:   Full typed client for Node.js/browser, same resource API
+CLI Tool (agentred):         40+ Click commands, Rich terminal UI, CI/CD exit codes
+Monitor SDK (pip):           agentred-monitor — non-blocking background analysis
+
+DEPLOYMENT
+─────────────────────────────────────────────────────────────────────────────
+Docker Compose:              7 services (postgres, redis, backend, worker, beat, flower, frontend)
+Railway:                     railway.toml — backend auto-deploy
+Vercel:                      vercel.json — frontend + API rewrites
+GitHub Actions CI:           ci.yml — build/test on ubuntu, Python 3.12 + Node 20
+GitHub Actions Deploy:       deploy.yml — Railway + Vercel production deploys
+Environment:                 .env.example — complete template (NO Stripe/billing vars)
+
+BILLING/PRICING: NONE (per NoBilling directive)
+  ✓ plan hardcoded to "pro" 
+  ✓ No Stripe dependency
+  ✓ No rate limits or feature gates
+  ✓ Landing page: "Free during beta"
+
+TOTAL BUILD
+─────────────────────────────────────────────────────────────────────────────
+Python files:                348+ total files
+All imports verified:        21/21 core modules import cleanly

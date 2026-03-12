@@ -1,0 +1,440 @@
+/**
+ * AgentRed Report Stylesheet
+ * Professional CSS for PDF reports
+ * Red/dark/white brand colors with print optimization
+ */
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10pt;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background: white;
+}
+
+/* Page Setup for PDF */
+@page {
+    size: A4;
+    margin: 1cm;
+    background: white;
+}
+
+@page :first {
+    margin: 1cm;
+}
+
+@page :blank {
+    margin: 0;
+}
+
+/* Headers */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    border-bottom: 3px solid #dc2626;
+    padding-bottom: 0.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #374151;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    page-break-after: avoid;
+}
+
+h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #4b5563;
+    margin-top: 0.75rem;
+    margin-bottom: 0.4rem;
+}
+
+h5, h6 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #6b7280;
+}
+
+/* Paragraphs and Text */
+p {
+    margin-bottom: 0.8rem;
+    text-align: justify;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+strong, b {
+    font-weight: 700;
+    color: #1f2937;
+}
+
+em, i {
+    font-style: italic;
+}
+
+code {
+    font-family: "Courier New", Courier, monospace;
+    background: #f3f4f6;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+pre {
+    background: #1f2937;
+    color: #e5e7eb;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.85rem;
+    page-break-inside: avoid;
+}
+
+/* Lists */
+ul, ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+li {
+    margin-bottom: 0.4rem;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    page-break-inside: auto;
+}
+
+table tr {
+    page-break-inside: avoid;
+}
+
+thead {
+    background: #1f2937;
+    color: white;
+}
+
+th {
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #dc2626;
+}
+
+td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+tbody tr:nth-child(even) {
+    background: #f9fafb;
+}
+
+tbody tr:hover {
+    background: #f3f4f6;
+}
+
+/* Links */
+a {
+    color: #dc2626;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #7f1d1d;
+}
+
+/* Brand Header */
+.header {
+    background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+    color: white;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 4px;
+    page-break-after: avoid;
+}
+
+.header h1 {
+    color: white;
+    border: none;
+    padding: 0;
+    margin: 0 0 0.5rem 0;
+}
+
+.header p {
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 0.25rem;
+}
+
+/* Sections */
+.section {
+    margin-bottom: 2rem;
+    page-break-inside: avoid;
+}
+
+/* Cards */
+.card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    page-break-inside: avoid;
+}
+
+.card.highlight {
+    border-left: 4px solid #dc2626;
+    background: #fef2f2;
+}
+
+/* Status Badges */
+.badge {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.badge-critical {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.badge-high {
+    background: #fecaca;
+    color: #b91c1c;
+}
+
+.badge-medium {
+    background: #fde047;
+    color: #b45309;
+}
+
+.badge-low {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.badge-pass {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.badge-fail {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.badge-partial {
+    background: #fde047;
+    color: #b45309;
+}
+
+.badge-not-tested {
+    background: #e5e7eb;
+    color: #6b7280;
+}
+
+/* Progress Bar */
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: #e5e7eb;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #dc2626 0%, #7f1d1d 100%);
+    transition: width 0.3s ease;
+}
+
+/* Alerts and Callouts */
+.alert {
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    page-break-inside: avoid;
+}
+
+.alert-critical {
+    background: #fee2e2;
+    border-left: 4px solid #dc2626;
+    color: #7f1d1d;
+}
+
+.alert-warning {
+    background: #fffbeb;
+    border-left: 4px solid #f59e0b;
+    color: #92400e;
+}
+
+.alert-info {
+    background: #ecf0ff;
+    border-left: 4px solid #3b82f6;
+    color: #1e3a8a;
+}
+
+.alert-success {
+    background: #ecfdf5;
+    border-left: 4px solid #10b981;
+    color: #065f46;
+}
+
+/* Metrics Grid */
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.metric {
+    background: #f9fafb;
+    border-left: 4px solid #dc2626;
+    padding: 1rem;
+    border-radius: 4px;
+    page-break-inside: avoid;
+}
+
+.metric-label {
+    font-size: 0.85rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #dc2626;
+}
+
+/* Finding Block */
+.finding {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-left: 3px solid #dc2626;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    page-break-inside: avoid;
+}
+
+.finding-id {
+    font-weight: 700;
+    color: #dc2626;
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+}
+
+.finding-details {
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+/* Page Break Control */
+.page-break {
+    page-break-after: always;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.no-break {
+    page-break-inside: avoid;
+}
+
+/* Footer */
+.footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+    font-size: 0.85rem;
+    color: #6b7280;
+    text-align: center;
+    page-break-inside: avoid;
+}
+
+.footer strong {
+    color: #dc2626;
+}
+
+/* Print Adjustments */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+
+    a {
+        color: #7f1d1d;
+        text-decoration: underline;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+
+    table, pre, .card, .finding {
+        page-break-inside: avoid;
+    }
+
+    ul, ol {
+        page-break-inside: avoid;
+    }
+}
+
+/* Responsive adjustments for smaller screens (if needed) */
+@media (max-width: 800px) {
+    .metrics {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 0.5rem;
+    }
+}

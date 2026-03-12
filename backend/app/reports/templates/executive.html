@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgentRed Executive Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 1cm;
+            @bottom-center {
+                content: "Page " counter(page) " of " counter(pages);
+                font-size: 10pt;
+                color: #666;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background: #fff;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+            color: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .timestamp {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* Executive Summary */
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            color: #1f2937;
+            border-bottom: 3px solid #dc2626;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section h3 {
+            font-size: 1.1rem;
+            color: #374151;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Risk Score Card */
+        .risk-card {
+            background: #f9fafb;
+            border: 2px solid #dc2626;
+            border-radius: 6px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .risk-score-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #dc2626;
+            margin: 0.5rem 0;
+        }
+
+        .risk-level {
+            font-size: 1.3rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .risk-level.critical {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .risk-level.high {
+            background: #fecaca;
+            color: #b91c1c;
+        }
+
+        .risk-level.medium {
+            background: #fde047;
+            color: #b45309;
+        }
+
+        .risk-level.low {
+            background: #d1fae5;
+            color: #047857;
+        }
+
+        /* Key Metrics */
+        .metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric {
+            background: #f9fafb;
+            border-left: 4px solid #dc2626;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        /* Findings Table */
+        .findings-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .findings-table thead {
+            background: #1f2937;
+            color: white;
+        }
+
+        .findings-table th {
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .findings-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .findings-table tbody tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .severity-critical {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .severity-high {
+            background: #fecaca;
+            color: #b91c1c;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .severity-medium {
+            background: #fde047;
+            color: #b45309;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .severity-low {
+            background: #d1fae5;
+            color: #047857;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        /* Scan Summary */
+        .summary-text {
+            background: #ecfdf5;
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            color: #065f46;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.85rem;
+            color: #6b7280;
+            text-align: center;
+        }
+
+        .footer-branding {
+            font-weight: 600;
+            color: #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>AgentRed Executive Report</h1>
+        <p>AI Red Teaming & Security Assessment</p>
+        <div class="timestamp">Generated: {{ generated_at }}</div>
+    </div>
+
+    <!-- Executive Summary Section -->
+    <div class="section">
+        <h2>Executive Summary</h2>
+        <div class="summary-text">
+            <strong>Scan ID:</strong> {{ scan.scan_id }}<br>
+            <strong>Target:</strong> {{ scan.target_name }}<br>
+            <strong>Scan Date:</strong> {{ scan.scan_date }}<br>
+            <strong>Total Attacks Executed:</strong> {{ total_attacks }}
+        </div>
+    </div>
+
+    <!-- Risk Assessment -->
+    <div class="section">
+        <h2>Risk Assessment</h2>
+        <div class="risk-card">
+            <div>Overall Risk Score</div>
+            <div class="risk-score-value">{{ risk_score }}</div>
+            <div class="risk-level {% if risk_level == 'Critical' %}critical{% elif risk_level == 'High' %}high{% elif risk_level == 'Medium' %}medium{% else %}low{% endif %}">
+                {{ risk_level }}
+            </div>
+        </div>
+
+        <div class="metrics">
+            <div class="metric">
+                <div class="metric-label">Critical Findings</div>
+                <div class="metric-value">{{ critical_count }}</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">High Findings</div>
+                <div class="metric-value">{{ high_count }}</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Medium Findings</div>
+                <div class="metric-value">{{ medium_count }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Findings -->
+    <div class="section">
+        <h2>Top 5 Findings</h2>
+        <table class="findings-table">
+            <thead>
+                <tr>
+                    <th>Attack ID</th>
+                    <th>Category</th>
+                    <th>Severity</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for finding in top_findings %}
+                <tr>
+                    <td><strong>{{ finding.attack_id }}</strong></td>
+                    <td>{{ finding.category }}</td>
+                    <td>
+                        <span class="severity-{{ finding.severity | lower }}">
+                            {{ finding.severity | upper }}
+                        </span>
+                    </td>
+                    <td>{% if finding.success %}Success{% else %}Blocked{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Recommendations -->
+    <div class="section">
+        <h2>Recommendations</h2>
+        <h3>Immediate Actions (Next 2 Weeks)</h3>
+        <ul style="margin-left: 1.5rem; line-height: 1.8;">
+            <li>Address all critical severity findings before system deployment</li>
+            <li>Implement input validation and output sanitization controls</li>
+            <li>Establish incident response procedures for security issues</li>
+        </ul>
+
+        <h3>Medium-Term Actions (Next 4-8 Weeks)</h3>
+        <ul style="margin-left: 1.5rem; line-height: 1.8;">
+            <li>Develop comprehensive security documentation</li>
+            <li>Implement continuous monitoring and logging</li>
+            <li>Establish regular red teaming schedules</li>
+        </ul>
+
+        <h3>Long-Term Actions (Ongoing)</h3>
+        <ul style="margin-left: 1.5rem; line-height: 1.8;">
+            <li>Maintain proactive security testing program</li>
+            <li>Keep threat models updated with new attack vectors</li>
+            <li>Conduct quarterly compliance assessments</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>This report was generated by <span class="footer-branding">AgentRed</span> — AI Security Testing Platform</p>
+        <p>For detailed technical findings, see Technical Report. For compliance mapping, see Compliance Report.</p>
+    </div>
+</body>
+</html>
