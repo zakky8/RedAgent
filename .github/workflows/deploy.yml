@@ -1,0 +1,35 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Trigger Railway deployment
+      if: startsWith(github.ref, 'refs/tags/v')
+      env:
+        RAILWAY_API_TOKEN: ${{ secrets.RAILWAY_API_TOKEN }}
+      run: |
+        echo "Deploy to Railway (configure RAILWAY_API_TOKEN in secrets)"
+        # railway up --service api --environment production
+    
+    - name: Trigger Vercel deployment
+      if: startsWith(github.ref, 'refs/tags/v')
+      env:
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      run: |
+        echo "Deploy to Vercel (configure VERCEL_TOKEN in secrets)"
+        # npm run deploy:vercel
+
+    - name: Notify deployment
+      if: always()
+      run: |
+        echo "Deployment pipeline completed"
